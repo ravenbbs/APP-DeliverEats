@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import MenuItem from '../menu/MenuItem'
+import SectionHeader from './SectionHeader'
 
 export default function HomeMenu(){
   return(
@@ -13,12 +14,8 @@ export default function HomeMenu(){
         </div>
       </div>
       <div className="text-center font-semibold mb-6">
-        <h3 className="text-gray-600 text-xl leading-3">
-          Check Out
-        </h3>
-        <h2 className="text-customColor font-bold text-4xl italic">
-          Menu
-        </h2>
+        <SectionHeader subHeader={'Check Out'} mainHeader={'Menu'} />
+
       </div>
       <div className='grid grid-cols-3 gap-4'>
         <MenuItem />

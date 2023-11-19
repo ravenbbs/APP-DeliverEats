@@ -9,7 +9,7 @@ export default function HomeMenu(){
         <div className='absolute -top-44 -left-36 -z-10'>
          <Image src={'/salad-left.png'} width={328} height={248} alt={'Pizza deliciosa'}/>
         </div>
-        <div className='absolute -top-28 -right-0 -z-10'>
+        <div className='absolute -top-16 -right-0 -z-10'>
          <Image src={'/salad-right.png'} width={240} height={200} alt={'Pizza deliciosa'}/>
         </div>
       </div>

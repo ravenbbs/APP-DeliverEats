@@ -14,7 +14,7 @@ export default function Hero() {
             DeliverEats
           </span>
         </h1>
-        <p className='my-6 text-gray-500 text-sm' >
+        <p className='my-6 text-gray-500 text-md' >
           Desde hamburguesas que te hacen salivar hasta pizzas que son un festín para tus sentidos, ofrecemos una amplia variedad de delicias para satisfacer todos los antojos. ¡Ordena ahora y disfruta de una experiencia gastronómica única!
         </p>
         <div className='flex gap-4 font-bold' >

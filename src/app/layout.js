@@ -1,3 +1,4 @@
+import Header from '@/components/layout/Header'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 
@@ -13,8 +14,19 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={roboto.className}>
         <main className='max-w-4xl mx-auto p-2'>
+          <Header />
           {children}
         </main>
+
+        <footer className='font-normal text-gray-600 p-4 border-t'>
+          <p className='text-center'>
+            &copy; 2023 All rights reserved
+          </p>
+          <p className='text-center'>
+            Designed by <a className='hover:text-fuchsia-500 transition-colors font-bold' href="https://github.com/ravenbbs" target='_blank'> ravenbbs </a>
+          </p>
+        </footer>
+
       </body>
     </html>
   )

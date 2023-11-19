@@ -1,4 +1,3 @@
-import Header from '@/components/layout/Header'
 import Hero from '@/components/layout/Hero'
 import HomeMenu from '@/components/layout/HomeMenu'
 import SectionHeader from '@/components/layout/SectionHeader'
@@ -9,7 +8,7 @@ import Link from 'next/link'
 export default function Home() {
   return (
     < >
-      <Header />
+     
       <Hero />
       <HomeMenu />
       <section className='text-center my-12'>
@@ -42,16 +41,6 @@ export default function Home() {
       </div>
 
       </section>
-      <footer className='font-normal text-gray-600 p-4 border-t'>
-        <p className='text-center'>
-          &copy; 2023 All rights reserved
-        </p>
-        <p className='text-center'>
-          Designed by <a className='hover:text-fuchsia-500 transition-colors font-bold' href="https://github.com/ravenbbs" target='_blank'> ravenbbs </a>
-        </p>
-      </footer>
-
-
     </>
   )
 }

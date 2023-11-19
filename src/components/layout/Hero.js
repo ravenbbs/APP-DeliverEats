@@ -3,7 +3,7 @@ import Right from '../icons/Right'
 
 export default function Hero() {
   return (
-    <section className='hero'>
+    <section className='hero mt-6'>
       <div className='py-12'>
         <h1 className='text-4xl font-semibold ' >
             Haz que tu día 

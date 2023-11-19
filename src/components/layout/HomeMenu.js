@@ -1,10 +1,15 @@
 import Image from 'next/image'
+
 export default function HomeMenu(){
   return(
     <section className="">
-      <div className=''>
-        <Image scr={'../../../public/salad-left.png'}  alt={'lechuga'}/>
-
+      <div className='absolute left-0 right-0 w-full '>
+        <div className='absolute -top-44 -left-32 -z-10'>
+         <Image src={'/salad-left.png'} width={288} height={288} alt={'Pizza deliciosa'}/>
+        </div>
+        <div className='absolute -top-28 -right-32 -z-10'>
+         <Image src={'/salad-right.png'} width={288} height={288} alt={'Pizza deliciosa'}/>
+        </div>
       </div>
       <div className="text-center font-semibold">
         <h3 className="text-gray-600 text-xl leading-3">

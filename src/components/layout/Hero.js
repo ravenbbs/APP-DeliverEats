@@ -1,14 +1,20 @@
 import Image from 'next/image'
-import Right from '../icons/right'
+import Right from '../icons/Right'
 
 export default function Hero() {
   return (
     <section className='hero'>
       <div className='py-12'>
-        <h1 className='text-4xl font-semibold' >
-          Haz que tu día sea delicioso con DeliverEats
+        <h1 className='text-4xl font-semibold ' >
+            Haz que tu día 
+          <br/>
+            sea delicioso
+          <br/> 
+            con <span className='text-customColor'>
+            DeliverEats
+          </span>
         </h1>
-        <p className='mt-4 mb-4 text-gray-500' >
+        <p className='my-6 text-gray-500 text-sm' >
           Desde hamburguesas que te hacen salivar hasta pizzas que son un festín para tus sentidos, ofrecemos una amplia variedad de delicias para satisfacer todos los antojos. ¡Ordena ahora y disfruta de una experiencia gastronómica única!
         </p>
         <div className='flex gap-4 font-bold' >

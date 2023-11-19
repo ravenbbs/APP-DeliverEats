@@ -1,14 +1,30 @@
 import Image from 'next/image'
+import Right from '../icons/right'
 
 export default function Hero() {
   return (
-    <section>
-      <h1>La mejor pizza del mundo</h1>
-      <p>Debido a sus ingredientes de calidad es calificada como la mejor del mundo</p>
-      <div className='w-full h-max' >
-      <Image src={'/pizza-7972.png'} layout={'fill'} objectFit={'contain'} alt={'Pizza deliciosa'}/>
+    <section className='hero'>
+      <div className='py-12'>
+        <h1 className='text-4xl font-semibold' >
+          Haz que tu día sea delicioso con DeliverEats
+        </h1>
+        <p className='mt-4 mb-4 text-gray-500' >
+          Desde hamburguesas que te hacen salivar hasta pizzas que son un festín para tus sentidos, ofrecemos una amplia variedad de delicias para satisfacer todos los antojos. ¡Ordena ahora y disfruta de una experiencia gastronómica única!
+        </p>
+        <div className='flex gap-4 font-bold' >
+          <button className='bg-red-600 px-4 py-2 rounded-full text-white flex gap-2' >
+            Ordena Ya
+            <Right/>
+          </button>
+          <button className='flex gap-2 py-2 text-gray-600' >
+            Ver Mas
+            <Right/>
+          </button>
+        </div>
       </div>
-
+      <div className='relative' >
+        <Image src={'/pizza-7972.png'} layout={'fill'} objectFit={'contain'} alt={'Pizza deliciosa'}/>
+      </div>
     </section>
   )
 }

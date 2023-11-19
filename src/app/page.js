@@ -29,7 +29,12 @@ export default function Home() {
             Colaboramos con chefs talentosos y proveedores de confianza para garantizar la frescura y calidad de cada ingrediente. Únete a nosotros en este viaje culinario y descubre por qué <span className='text-customColor font-bold'>DeliverEats</span> es tu elección para una experiencia gastronómica excepcional.
           </p>
         </div>
-
+      </section>
+      <section className='text-center my-12' >
+      <SectionHeader 
+        subHeader={'Quienes Somos?'} 
+        mainHeader={"About us"} 
+        />
       </section>
 
     </>

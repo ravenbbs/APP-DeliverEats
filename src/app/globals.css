@@ -12,10 +12,20 @@ input[type="email"], input[type="password"], input[type="text"]{
   @apply border p-2 border-gray-400 bg-gray-200;
 }
 
+input[type="email"]:disabled,
+input[type="password"]:disabled, 
+input[type="text"]:disabled{
+  @apply bg-gray-300 cursor-not-allowed border-none;
+}
+
 button{
   @apply block w-full text-gray-600 font-bold;
   @apply my-2 border py-2 px-4 border-gray-500 rounded-lg;
 }
+
 button[type="submit"], .submit{
   @apply border-0 bg-red-600 text-white;
+}
+button[type="submit"]:disabled, .submit:disabled{
+  @apply bg-red-300 cursor-not-allowed;
 }

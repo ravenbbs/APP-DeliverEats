@@ -20,7 +20,7 @@ input[type="text"]:disabled{
 
 button{
   @apply block w-full text-gray-600 font-bold;
-  @apply my-2 border py-2 px-4 border-gray-500 rounded-lg;
+  @apply my-2 border py-2 px-4 border-gray-400 rounded-lg hover:scale-105	transition-all;
 }
 
 button[type="submit"], .submit{

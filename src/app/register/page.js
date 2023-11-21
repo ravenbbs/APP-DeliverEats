@@ -29,7 +29,7 @@ export default function RegisterPage() {
 
   return (
     <section className="mt-8">
-      <h1 className="text-center text-customColor text-4xl font-bold">
+      <h1 className="text-center text-customColor text-4xl font-bold my-6">
         Regístrate
       </h1>
       {userCreated && (
@@ -37,7 +37,7 @@ export default function RegisterPage() {
           Usuario Creado <br />
           Ahora puedes{" "}
           <Link className="text-red-600" href={"/login"}>
-            Iniciar Secion &raquo;
+            Iniciar Sesión &raquo;
           </Link>
         </div>
       )}
@@ -71,20 +71,27 @@ export default function RegisterPage() {
         <button type="submit" disabled={creatingUser}>
           Registrar
         </button>
-        <div className="text-center text-gray-400 grid grid-cols-3 justify-center items-center">
+        <div className="text-center text-gray-400 grid grid-cols-3 justify-center items-center my-3">
           <hr className="border border-gray-300" />
           o regístrate con
           <hr className="border border-gray-300" />
         </div>
-        <button className=" flex justify-center gap-4 items-center">
+        <button className=" flex justify-center gap-4 items-center ">
           <Image
             src={"/google.png"}
-            width={32}
-            height={32}
+            width={26}
+            height={26}
             alt={"Google Icon"}
           />
           Ingresa con Google
         </button>
+        <div className="text-center text-gray-600 hover:text-gray-800 transition-all my-4 pt-4 border-t">
+          Ya tienes cuenta?{' '}
+          <Link className="text-red-500 font-medium hover:text-red-600 transition-colors" href={"/login"}>
+            Inicia Sesión 
+          </Link>
+        </div>
+
       </form>
     </section>
   );

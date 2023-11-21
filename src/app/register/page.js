@@ -85,13 +85,16 @@ export default function RegisterPage() {
           />
           Ingresa con Google
         </button>
-        <div className="text-center text-gray-600 hover:text-gray-800 transition-all my-4 pt-4 border-t">
-          Ya tienes cuenta?{' '}
-          <Link className="text-red-500 font-medium hover:text-red-600 transition-colors" href={"/login"}>
-            Inicia Sesión 
+        <hr className="border border-gray-300 my-4" />
+        <div className="text-center text-gray-600 hover:text-gray-800 transition-all my-2 ">
+          Ya tienes cuenta?{" "}
+          <Link
+            className="text-red-500 font-medium hover:text-red-600 transition-colors"
+            href={"/login"}
+          >
+            Inicia Sesión
           </Link>
         </div>
-
       </form>
     </section>
   );

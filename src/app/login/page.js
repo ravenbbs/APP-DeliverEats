@@ -6,8 +6,18 @@ import Image from "next/image";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function handleFormSubmit(ev){
+  async function handleFormSubmit(ev){
     ev.preventDefault();
+    const {ok} = await fetch('/api/login', {
+      body: JSON.stringify({email, password}),
+      headers: {'Content-Type': 'application/json'},
+      method: 'POST',
+    })
+    if(ok){
+
+    } else {
+
+    }
   }
   return (
     <section className=" mt-8 ">
@@ -21,7 +31,7 @@ export default function LoginPage() {
           value={email}
           required
           disabled={false}
-          // onChange={(ev) => setEmail(ev.target.value)}
+          onChange={(ev) => setEmail(ev.target.value)}
         />
         <input
           type="password"
@@ -30,7 +40,7 @@ export default function LoginPage() {
           required
           minLength={"5"}
           disabled={false}
-          // onChange={(ev) => setPassword(ev.target.value)}
+          onChange={(ev) => setPassword(ev.target.value)}
         />
         <button type="submit" disabled={false}>
           Ingresar

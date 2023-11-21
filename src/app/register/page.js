@@ -17,7 +17,7 @@ export default function RegisterPage() {
     const response = await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({ email, password }),
-      headers: { "content-type": "application/json" },
+      headers: { 'Content-type': 'application/json' },
     });
     if (response.ok) {
       setUserCreated(true);

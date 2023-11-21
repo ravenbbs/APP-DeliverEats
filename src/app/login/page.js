@@ -6,8 +6,11 @@ import Image from "next/image";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginInProgress, setLoginInProgress] = useState("");
+
   async function handleFormSubmit(ev){
     ev.preventDefault();
+    setLoginInProgress(true);
     const {ok} = await fetch('/api/login', {
       body: JSON.stringify({email, password}),
       headers: {'Content-Type': 'application/json'},
@@ -18,6 +21,7 @@ export default function LoginPage() {
     } else {
 
     }
+    setLoginInProgress(false);
   }
   return (
     <section className=" mt-8 ">
@@ -30,7 +34,7 @@ export default function LoginPage() {
           placeholder="Ingresa correo"
           value={email}
           required
-          disabled={false}
+          disabled={loginInProgress}
           onChange={(ev) => setEmail(ev.target.value)}
         />
         <input
@@ -39,10 +43,10 @@ export default function LoginPage() {
           value={password}
           required
           minLength={"5"}
-          disabled={false}
+          disabled={loginInProgress}
           onChange={(ev) => setPassword(ev.target.value)}
         />
-        <button type="submit" disabled={false}>
+        <button type="submit" disabled={loginInProgress}>
           Ingresar
         </button>
         <div className="text-center text-gray-400 grid grid-cols-3 justify-center items-center my-3">

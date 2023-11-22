@@ -1,21 +1,18 @@
-'use client';
-import { useSession } from "next-auth/react"
-import {redirect} from "next/navigation"
-import Image from 'next/image'
-
+"use client";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const session = useSession();
-  const {status} = session;
-  console.log(session)
+  const { status } = session;
+  console.log(session);
 
-  if (status === 'loading') {
-    return 'loading...';
-    
+  if (status === "loading") {
+    return "loading...";
   }
-  if (status === 'unauthenticated') {
-    redirect('/login');
-    
+  if (status === "unauthenticated") {
+    redirect("/login");
   }
 
   const userImage = session.data.user.image;
@@ -31,12 +28,10 @@ export default function ProfilePage() {
             <Image src={userImage} width={64} height={64} alt="avatar" />
           </div>
           <div className="bg-red-500 w-full">
-            <input>
-            
-            </input>
+            <input></input>
           </div>
         </div>
       </form>
     </section>
-  )
+  );
 }

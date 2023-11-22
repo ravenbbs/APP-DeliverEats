@@ -1,19 +1,19 @@
-'use client';
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {signIn} from 'next-auth/react' //importamos para poder iniciar sesión con google.
+import { signIn } from "next-auth/react"; //importamos para poder iniciar sesión con google.
 
 //
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loginInProgress, setLoginInProgress] = useState(false);
 
-  async function handleFormSubmit(ev){
+  async function handleFormSubmit(ev) {
     ev.preventDefault();
     setLoginInProgress(true);
-    await signIn('credentials', {email, password, callbackUrl:'/'})
+    await signIn("credentials", { email, password, callbackUrl: "/" });
     setLoginInProgress(false);
   }
   return (
@@ -47,7 +47,11 @@ export default function LoginPage() {
           Inicia Sesión con
           <hr className="border border-gray-300" />
         </div>
-        <button type="button" className=" flex justify-center gap-4 items-center " onClick={() => signIn('google',{callbackUrl:'/'})}>
+        <button
+          type="button"
+          className=" flex justify-center gap-4 items-center "
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
           <Image
             src={"/google.png"}
             width={26}

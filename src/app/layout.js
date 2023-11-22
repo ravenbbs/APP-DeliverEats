@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import  AppProvider  from '@/components/AppContext'
+import Header from '../components/layout/Header'
+import  AppProvider  from '../components/AppContext'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 

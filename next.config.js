@@ -1,14 +1,29 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+    
+      },
+    ]
+  },
+
+}
 
 module.exports = nextConfig
 
-const path = require('path');
 
-module.exports = {
-  webpack: (config) => {
-    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
-    return config;
-  },
-};
+
+
+// Me lo dio el chat para que el @ resuelva desde el scr pero me crea conflicto
+// const path = require('path');
+
+// module.exports = {
+//   webpack: (config) => {
+//     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+//     return config;
+//   },
+// };
 

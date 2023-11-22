@@ -4,12 +4,14 @@ import * as mongoose from "mongoose";
 import User from "../../../models/User";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
-
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import clientPromise from "../../../../libs/mongoConnect"
 
 
 
 const handler = NextAuth({
   secret: process.env.SECRET,
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
 
     GoogleProvider({
@@ -25,7 +27,7 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const {email, password} = credentials; //pendiente
+        const {email, password} = credentials;
 
         mongoose.connect(process.env.MONGO_URL);
         const user = await User.findOne({email});

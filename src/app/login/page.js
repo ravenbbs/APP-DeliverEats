@@ -2,9 +2,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {signIn} from 'next-auth/react'
+import {signIn} from 'next-auth/react' //importamos para poder iniciar sesión con google.
 
-
+//
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -53,7 +53,6 @@ export default function LoginPage() {
             width={26}
             height={26}
             alt={"Google Icon"}
-            
           />
           Ingresa con Google
         </button>

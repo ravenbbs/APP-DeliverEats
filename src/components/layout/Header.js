@@ -6,13 +6,15 @@ export default function Header() {
   const session = useSession();
   console.log(session)
   const userData = session.data?.user;
-  const userName = userData?.name || userData?.email;
-
   const status = session.status;
+  let userName = userData?.name || userData?.email;
+  if (userName && userName.includes(' ')) {
+    userName = userName.split(' ')[0]
+  }
 
   return(
     <header className='flex items-center justify-between mt-2'>
-    <nav className='flex gap-6 text-gray-600 font-semibold items-center'>
+    <nav className='flex gap-4 text-gray-600 font-semibold items-center'>
     <Link href={'/'} className='text-customColor font-semibold text-2xl pr-4'>DeliverEats</Link>
       <Link href={'/'}>Home</Link>
       <Link href={''}>Menu</Link>
@@ -23,8 +25,8 @@ export default function Header() {
     <nav className='flex gap-6 text-gray-600 font-semibold items-center'>
       {status === 'authenticated' && (
         <>
-          <Link href={'/profile'} className='text-gray-500'>
-             {userName}
+          <Link href={'/profile'} className='text-gray-500 whitespace-nowrap'>
+              Hola, {userName}
           </Link>
 
           <button 

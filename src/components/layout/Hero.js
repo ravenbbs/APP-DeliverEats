@@ -18,11 +18,11 @@ export default function Hero() {
           Desde hamburguesas que te hacen salivar hasta pizzas que son un festín para tus sentidos, ofrecemos una amplia variedad de delicias para satisfacer todos los antojos. ¡Ordena ahora y disfruta de una experiencia gastronómica única!
         </p>
         <div className='flex gap-4 font-bold' >
-          <button className='bg-red-600 px-4 py-2 rounded-full text-white flex gap-2' >
+          <button className='bg-red-600 px-4 py-2 rounded-full text-white flex gap-2 justify-center ' >
             Ordena Ya
             <Right/>
           </button>
-          <button className='flex gap-2 py-2 text-gray-600' >
+          <button className='flex gap-2 py-2 text-gray-600 border-0 items-center' >
             Ver Mas
             <Right/>
           </button>

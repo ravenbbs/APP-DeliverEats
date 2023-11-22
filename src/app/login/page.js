@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,23 +6,14 @@ import {signIn} from 'next-auth/react'
 
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginInProgress, setLoginInProgress] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginInProgress, setLoginInProgress] = useState(false);
 
   async function handleFormSubmit(ev){
     ev.preventDefault();
     setLoginInProgress(true);
-    const {ok} = await fetch('/api/login', {
-      body: JSON.stringify({email, password, callbackUrl:'/'}),
-      headers: {'Content-Type': 'application/json'},
-      method: 'POST',
-    })
-    if(ok){
-
-    } else {
-
-    }
+    await signIn('credentials', {email, password, callbackUrl:'/'})
     setLoginInProgress(false);
   }
   return (

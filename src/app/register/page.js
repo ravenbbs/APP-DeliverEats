@@ -12,11 +12,12 @@ export default function RegisterPage() {
   const [error, setError] = useState(false);
   async function handleFormSubmit(ev) {
     ev.preventDefault();
+
     setCreatingUser(true);
     setError(false);
     setUserCreated(false);
     const response = await fetch("/api/register", {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-type': 'application/json' },
     });
@@ -51,7 +52,7 @@ export default function RegisterPage() {
         </div>
       )}
 
-      <form className="block max-w-sm mx-auto" onSubmit={handleFormSubmit}>
+      <form className="block max-w-sm mx-auto" onSubmit={handleFormSubmit} >
         <input
           type="email"
           placeholder="Ingresa tu correo"

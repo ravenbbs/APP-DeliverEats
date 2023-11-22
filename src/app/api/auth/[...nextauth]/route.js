@@ -9,6 +9,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 
 const handler = NextAuth({
+  secret: process.env.SECRET,
   providers: [
 
     GoogleProvider({
@@ -20,11 +21,11 @@ const handler = NextAuth({
       name: "Credentials",
       id: "credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "test@email.com" },
+        username: { label: "Email", type: "email", placeholder: "test@email.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const {email, password} = credentials;
+        const {email, password} = credentials; //pendiente
 
         mongoose.connect(process.env.MONGO_URL);
         const user = await User.findOne({email});

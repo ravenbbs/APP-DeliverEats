@@ -6,7 +6,7 @@ export default function Header() {
   const session = useSession();
   const status = session.status;
   return(
-    <header className='flex items-center justify-between'>
+    <header className='flex items-center justify-between mt-2'>
     <nav className='flex gap-6 text-gray-600 font-semibold items-center'>
     <Link href={'/'} className='text-customColor font-semibold text-2xl pr-4'>DeliverEats</Link>
       <Link href={'/'}>Home</Link>

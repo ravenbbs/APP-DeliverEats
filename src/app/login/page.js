@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {signIn} from 'next-auth/react'
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -12,7 +14,7 @@ export default function LoginPage() {
     ev.preventDefault();
     setLoginInProgress(true);
     const {ok} = await fetch('/api/login', {
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({email, password, callbackUrl:'/'}),
       headers: {'Content-Type': 'application/json'},
       method: 'POST',
     })
@@ -54,12 +56,13 @@ export default function LoginPage() {
           Inicia Sesión con
           <hr className="border border-gray-300" />
         </div>
-        <button className=" flex justify-center gap-4 items-center ">
+        <button type="button" className=" flex justify-center gap-4 items-center " onClick={() => signIn('google',{callbackUrl:'/'})}>
           <Image
             src={"/google.png"}
             width={26}
             height={26}
             alt={"Google Icon"}
+            
           />
           Ingresa con Google
         </button>

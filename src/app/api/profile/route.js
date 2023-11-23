@@ -14,7 +14,6 @@ export async function PUT(req) {
   if ('name' in data){
     //Update user name
     const result =  await User.updateOne({email}, {name:data.name})
-    console.log ({email, name:data.name}, result);
 
   }
 

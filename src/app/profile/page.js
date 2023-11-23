@@ -34,14 +34,15 @@ export default function ProfilePage() {
   }
 
   async function handleFileChange(ev) {
+    console.log(ev.target.files[0])
     const files = ev.target.files;
     if(files?.length === 1){
       const data = new FormData;
       data.set('file', files[0])
-      fetch('/api/upload', {
+      await fetch('/api/upload', {
         method: 'POST',
         body: data,
-        headers:{'Content-Type': 'multipart/form-data'}
+        //headers:{'Content-Type': 'multipart/form-data'}
 
       })
 
@@ -81,7 +82,7 @@ export default function ProfilePage() {
               <Image className="rounded-lg w-full h-full mb-2" src={userImage} width={150} height={150} alt="avatar" />
               <label>
               <input type="file" className="hidden" onChange={handleFileChange}></input>
-              <span className="block mt-2 border p-2 border-gray-400 bg-gray-300  rounded-lg hover:scale-105	transition-all text-center font-semibold">
+              <span className=" cursor-pointer block mt-2 border p-2 border-gray-400 bg-gray-300  rounded-lg hover:scale-105	transition-all text-center font-semibold">
                 Editar
               </span>
               </label>

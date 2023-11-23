@@ -43,6 +43,9 @@ export default function ProfilePage() {
       <h1 className="text-center text-customColor text-4xl font-bold my-6">
         Perfil
       </h1>
+      <h2>
+        Perfil Actualizado!!
+      </h2>
       <div className="max-w-md mx-auto border my-6">
         <div className="flex gap-2 items-center">
           <div>

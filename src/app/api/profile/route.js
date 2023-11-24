@@ -10,10 +10,21 @@ export async function PUT(req) {
   const session = await getServerSession(authOptions);
   const email = session.user.email;
 
+  const update ={}
 
   if ('name' in data){
+    //Add user name to update
+    update.name = data.name
+  }
+  if ('image' in data){
+    //Add user image to update
+    update.image = data.image
+  }
+
+
+  if (Object.keys(update).length > 0 ){
     //Update user name
-    const result =  await User.updateOne({email}, {name:data.name})
+    await User.updateOne({email}, update)
 
   }
 

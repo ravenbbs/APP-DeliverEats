@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
 export default function ProfilePage() {
   const session = useSession();
   const [userName, setUserName] = useState('');
+  const [image, setImage] = useState('');
   const { status } = session;
   const [saved, setSaved] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [userImgUrl,setUserImgUrl]= useState(null);
 
   useEffect(() => {
     if (status === 'authenticated'){
       setUserName(session?.data?.user?.name);
+      setImage(session.data.user.image)
     }
   }, [session, status]);
 
@@ -25,7 +27,7 @@ export default function ProfilePage() {
     const response = await fetch('/api/profile', {
       method: 'PUT',
       headers:{'Content-Type': 'application/json'},
-      body: JSON.stringify({name:userName}),
+      body: JSON.stringify({name:userName, image:image}),
     })
     setIsSaving(false)
     if (response.ok) {
@@ -36,26 +38,21 @@ export default function ProfilePage() {
  
   async function handleFileChange(ev) {
     ev.preventDefault();
-    setSaved(false);
-    setIsSaving(true);
+    
     const selectedFile = ev.target.files[0];
     if (selectedFile) {
       try {
+        setIsUploading(true)
         const formData = new FormData();
-        
         formData.append("file", selectedFile);
         const response = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         });
-        setIsSaving(false)
-
         if (response.ok) {
           const data = await response.json();
-          
-          setUserImgUrl(data.url);
-          setSaved(true);
- 
+          setImage(data.url);
+          setIsUploading(false)
         } else {
           console.error('Error al subir la imagen a Cloudinary.');
         }
@@ -72,7 +69,9 @@ export default function ProfilePage() {
   if (status === "unauthenticated") {
     redirect("/login");
   }
-  const userImage = session.data.user.image;
+
+
+  
   return (
     <section className=" mt-8 ">
       <h1 className="text-center text-customColor text-4xl font-bold my-6">
@@ -89,13 +88,21 @@ export default function ProfilePage() {
         <h2 className=" bg-blue-200 font-semibold text-center p-6 m-2 rounded-md border border-blue-300">
           Cargando ...
         </h2>
+      )}
+      {isUploading && (
+        <h2 className=" bg-blue-200 font-semibold text-center p-6 m-2 rounded-md border border-blue-300">
+        Subiendo ...
+      </h2>
       )
 
       }
         <div className="flex gap-2 items-center">
           <div>
-            <div className=" bg-gray-200 p-2 rounded-lg ">
-              <Image className="rounded-lg w-full h-full mb-2" src={userImage} width={150} height={150} alt="avatar" />
+            <div className=" bg-gray-200 p-2 rounded-lg max-w-[120px] ">
+              { image &&(
+              <Image className="rounded-lg w-full h-full mb-2" src={image} width={150} height={150} alt="avatar" />
+
+              )}
               <label>
               <input type="file" className="hidden" onChange={handleFileChange}></input>
               <span className=" cursor-pointer block mt-2 border p-2 border-gray-400 bg-gray-300  rounded-lg hover:scale-105	transition-all text-center font-semibold">
@@ -108,16 +115,13 @@ export default function ProfilePage() {
             <input type="text" placeholder="Nombres"
             value={userName} onChange={ev => setUserName(ev.target.value)}>
             </input>
-            <input type="email" value={session.data.user.email} disabled="true" ></input>
+            <input type="email" value={session.data.user.email} disabled={true} ></input>
             <button type="submit">
               Guardar
             </button>
           </form>
         </div>
       </div>
-      {userImgUrl &&
-        <img src={userImgUrl}></img>
-      }
     </section>
   );
 }

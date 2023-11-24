@@ -35,7 +35,6 @@ export async function POST(req) {
       .end(buffer);
   });
 
-  console.log(response);
 
   return NextResponse.json({
     message: "Imagen Subida con Éxito",

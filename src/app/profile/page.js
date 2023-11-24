@@ -10,8 +10,7 @@ export default function ProfilePage() {
   const { status } = session;
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-
-  // const [userImg,setUserImg]= useState('')
+  const [userImgUrl,setUserImgUrl]= useState(null);
 
   useEffect(() => {
     if (status === 'authenticated'){
@@ -40,15 +39,11 @@ export default function ProfilePage() {
     setSaved(false);
     setIsSaving(true);
     const selectedFile = ev.target.files[0];
-
-    // handleButtonClick();
     if (selectedFile) {
-      // const url = "https://api.cloudinary.com/v1_1/ditprttvz/image/upload";
       try {
         const formData = new FormData();
         
         formData.append("file", selectedFile);
-        // formData.append('upload_preset', 'bqs8sgqc');
         const response = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
@@ -57,8 +52,8 @@ export default function ProfilePage() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('Datos de la imagen: ', data);
-          //setUserImg(data.secure_url);
+          
+          setUserImgUrl(data.url);
           setSaved(true);
  
         } else {
@@ -69,22 +64,6 @@ export default function ProfilePage() {
       }   
     }
   };
-
-  //   async function handleFileChange(ev) {
-//     const files = ev.target.files;
-//     if(files?.length === 1){
-//       const data = new FormData;
-//       data.set('file', files[0])
-//       await fetch('/api/upload', {
-//         method: 'POST',
-//         body: data,
-//       })
-//     }
-//   }
-
-
-
-
 
 
   if (status === "loading") {
@@ -136,6 +115,9 @@ export default function ProfilePage() {
           </form>
         </div>
       </div>
+      {userImgUrl &&
+        <img src={userImgUrl}></img>
+      }
     </section>
   );
 }

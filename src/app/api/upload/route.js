@@ -1,30 +1,76 @@
-// import {v2 as cloudinary} from 'cloudinary';
-
-
-// cloudinary.v2.config({
-//   cloud_name: process.env.CLOUDINARY_NAME,
-//   api_key: process.env.CLOUDINARY_KEY,
-//   api_secret: process.env.CLOUDINARY_SECRET,
-//   secure: true,
-// });
-
-
-// const {
-//   parseImage,
-//   generateUploadUrl,
-//   uploadImage,
-// } = require("../../../libs/cloudinary.config");
+import {NextResponse} from 'next/server';
+import {writeFile} from "fs/promises"
+import path from "path";
 
 
 export async function POST(req) {
   const data = await req.formData();
+  const file = data.get('file');
 
-  if (data.get("file")) {
-    const file = data.get("file");
-    console.log(file);
-
-
+  if (!file) {
+    return NextResponse.json('Archivo vacio', {status: 400});
   }
+  //convertir imagen del form en bytes 
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes)
 
-  return Response.json(true);
-}
+  //guardar imagen en el mismo repo - local 
+  const filePath = path.join(process.cwd(),"public", file.name);
+  await writeFile(filePath, buffer)
+
+
+
+  return NextResponse.json('imagen desde el router papure papa poure')
+};
+
+
+// const cloudinary = require('cloudinary');
+// const { parseImage, generateUploadUrl, uploadImage } = require('./cloudinaryUtils');
+
+// export async function POST(req) {
+//   const data = await req.formData();
+
+//   if (data.get('file')) {
+//     const file = data.get('file');
+
+//     if (file) {
+//       const imageData = await parseImage(file);
+//       const uploadUrl = await generateUploadUrl(imageData);
+//       const uploadedImage = await uploadImage(imageData, uploadUrl);
+
+//       console.log(uploadedImage);
+
+//       return Response.json({
+//         url: uploadedImage.url,
+//         publicId: uploadedImage.public_id,
+//       });
+//     } else {
+//       console.error('Missing file object');
+//       return Response.json({ error: 'Missing file object' });
+//     }
+//   }
+
+//   return Response.json(false);
+// }
+
+
+
+
+
+
+
+
+
+
+// export async function POST(req) {
+//   const data = await req.formData();
+
+//   if (data.get("file")) {
+//     const file = data.get("file");
+//     console.log(file);
+
+
+//   }
+
+//   return Response.json(true);
+// }

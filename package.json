@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.6",
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.13.0",
     "@strapi/provider-upload-cloudinary": "^4.15.4",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@types/node": "20.9.2",
     "@types/react": "18.2.37",
+    "@types/uniqid": "^5.3.4",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",

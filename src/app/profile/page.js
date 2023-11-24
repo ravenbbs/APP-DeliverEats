@@ -11,11 +11,12 @@ export default function ProfilePage() {
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  // const [userImg,setUserImg]= useState('')
+
   useEffect(() => {
     if (status === 'authenticated'){
       setUserName(session?.data?.user?.name);
     }
-
   }, [session, status]);
 
   async function handleProfileInfoUpdate(ev){
@@ -27,24 +28,64 @@ export default function ProfilePage() {
       headers:{'Content-Type': 'application/json'},
       body: JSON.stringify({name:userName}),
     })
-    console.log(response)
     setIsSaving(false)
     if (response.ok) {
       setSaved(true);
     }
   }
 
+ 
   async function handleFileChange(ev) {
-    const files = ev.target.files;
-    if(files?.length === 1){
-      const data = new FormData;
-      data.set('file', files[0])
-      await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      })
+    ev.preventDefault();
+    setSaved(false);
+    setIsSaving(true);
+    const selectedFile = ev.target.files[0];
+
+    // handleButtonClick();
+    if (selectedFile) {
+      // const url = "https://api.cloudinary.com/v1_1/ditprttvz/image/upload";
+      try {
+        const formData = new FormData();
+        
+        formData.append("file", selectedFile);
+        // formData.append('upload_preset', 'bqs8sgqc');
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        setIsSaving(false)
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Datos de la imagen: ', data);
+          //setUserImg(data.secure_url);
+          setSaved(true);
+ 
+        } else {
+          console.error('Error al subir la imagen a Cloudinary.');
+        }
+      } catch (error) {
+        console.error('Error en la solicitud a Cloudinary:', error);
+      }   
     }
-  }
+  };
+
+  //   async function handleFileChange(ev) {
+//     const files = ev.target.files;
+//     if(files?.length === 1){
+//       const data = new FormData;
+//       data.set('file', files[0])
+//       await fetch('/api/upload', {
+//         method: 'POST',
+//         body: data,
+//       })
+//     }
+//   }
+
+
+
+
+
 
   if (status === "loading") {
     return "loading...";
@@ -96,5 +137,5 @@ export default function ProfilePage() {
         </div>
       </div>
     </section>
-  );
+  );
 }

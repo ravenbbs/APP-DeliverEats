@@ -16,7 +16,7 @@ export default function Header() {
       <nav className="flex gap-4 text-gray-600 font-semibold items-center">
         <Link
           href={"/"}
-          className="text-customColor font-semibold text-2xl pr-4"
+          className="text-customColor font-semibold text-2xl pr-4 py-4"
         >
           DeliverEats
         </Link>

@@ -27,6 +27,7 @@ export default function ProfilePage() {
       headers:{'Content-Type': 'application/json'},
       body: JSON.stringify({name:userName}),
     })
+    console.log(response)
     setIsSaving(false)
     if (response.ok) {
       setSaved(true);
@@ -34,7 +35,6 @@ export default function ProfilePage() {
   }
 
   async function handleFileChange(ev) {
-    console.log(ev.target.files[0])
     const files = ev.target.files;
     if(files?.length === 1){
       const data = new FormData;
@@ -42,55 +42,9 @@ export default function ProfilePage() {
       await fetch('/api/upload', {
         method: 'POST',
         body: data,
-        //headers:{'Content-Type': 'multipart/form-data'}
-
       })
-
     }
-
   }
-
-  // const [selectedFile, setSelectedFile] = useState(null);
-
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setSelectedFile(file);
-  // };
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     const formData = new FormData();
-//     formData.append('profileImage', selectedFile);
-
-//     try {
-//       await fetch('/api/cambiarFotoDePerfil', {
-//         method: 'POST',
-//         body: formData,
-//       });
-
-//       // Lógica adicional después de cambiar la foto de perfil si es necesario
-//     } catch (error) {
-//       console.error('Error al cambiar la foto de perfil', error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1>Mi Perfil</h1>
-//       <form onSubmit={handleSubmit}>
-//         <input type="file" accept="image/*" onChange={handleFileChange} />
-//         <button type="submit">Guardar</button>
-//       </form>
-//       {/* Otras partes de tu página de perfil */}
-//     </div>
-//   );
-// }
-
-
-
-
-
 
   if (status === "loading") {
     return "loading...";

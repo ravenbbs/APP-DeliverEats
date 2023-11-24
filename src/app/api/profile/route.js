@@ -17,6 +17,5 @@ export async function PUT(req) {
 
   }
 
-
   return Response.json(true);
 }

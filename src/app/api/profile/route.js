@@ -10,23 +10,19 @@ export async function PUT(req) {
   const session = await getServerSession(authOptions);
   const email = session.user.email;
 
-  const update ={}
 
-  if ('name' in data){
-    //Add user name to update
-    update.name = data.name
-  }
-  if ('image' in data){
-    //Add user image to update
-    update.image = data.image
-  }
+    await User.updateOne({email}, data)
 
-
-  if (Object.keys(update).length > 0 ){
-    //Update user name
-    await User.updateOne({email}, update)
-
-  }
 
   return Response.json(true);
+}
+
+export async function GET(){
+  mongoose.connect(process.env.MONGO_URL)
+  const session = await getServerSession(authOptions);
+  const email = session.user.email;
+  return Response.json(
+    await User.findOne({email})
+  )
+  
 }

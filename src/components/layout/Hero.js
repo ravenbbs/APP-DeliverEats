@@ -19,7 +19,7 @@ export default function Hero() {
           experiencia gastronómica única!
         </p>
         <div className="flex gap-4 font-bold">
-          <button className="bg-red-600 px-4 py-2 rounded-full text-white flex gap-2 justify-center ">
+          <button className="bg-customColorBT px-4 py-2 rounded-full text-gray-800 flex gap-2 justify-center border-customColorPrimary">
             Ordena Ya
             <Right />
           </button>

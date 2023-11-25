@@ -8,7 +8,7 @@ export default function MenuItem() {
       <p className='text-gray-600 text-sm my-2'>
         Exquisita Chicken Burger: Pollo jugoso, sabores intensos, ¡una explosión de delicias en cada mordisco!
       </p>
-      <button className='bg-red-600 text-white px-4 py-2 rounded-full my-1 font-medium'>
+      <button className='bg-customColorBT text-gray-900 px-4 py-2 rounded-full my-1 font-medium border-customColorPrimary'>
         Agregar al carrito <span className='font-bold'>12$</span> 
       </button>
     </div>

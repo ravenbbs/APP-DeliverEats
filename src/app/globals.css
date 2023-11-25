@@ -7,25 +7,52 @@ section.hero{
   grid-template-columns: .4fr .6fr;
 }
 
-input[type="email"], input[type="password"], input[type="text"]{
-  @apply block w-full my-2 rounded-lg;
+input[type="email"], 
+input[type="password"], 
+input[type="text"],
+input[type="tel"]{
+  @apply block w-full mb-2 rounded-lg  focus:border-blue-400;
   @apply border p-2 border-gray-400 bg-gray-200;
+}
+
+textarea:focus, 
+input:focus{ 
+ 
+  outline-color: #e2953e;
 }
 
 input[type="email"]:disabled,
 input[type="password"]:disabled, 
-input[type="text"]:disabled{
+input[type="text"]:disabled,
+input[type="tel"]:disabled{
   @apply bg-gray-200 cursor-not-allowed border-none text-gray-500;
+
+}
+label{
+  @apply text-gray-600 font-semibold text-sm ;
+}
+label + input{
+  margin-top: -2px
 }
 
 button{
-  @apply block w-full text-gray-600 font-bold;
-  @apply my-2 border py-2 px-4 border-gray-400 rounded-lg hover:scale-105	transition-all;
+  @apply block w-full text-gray-600 font-bold border border-gray-400;
+  @apply my-2 py-2 px-4 border-gray-400 rounded-lg hover:scale-105	transition-all;
 }
 
 button[type="submit"], .submit{
-  @apply border-0 bg-red-600 text-white;
+  @apply border-0 bg-customColorBT text-gray-800;
 }
+
 button[type="submit"]:disabled, .submit:disabled{
-  @apply bg-red-300 cursor-not-allowed;
+  @apply bg-customColorPrimaryLight cursor-not-allowed;
+}
+
+div.tabs > * {
+  @apply inline-block bg-customColorPrimaryLight text-gray-700 font-bold py-2 px-4  hover:scale-105	transition-all rounded-full;
+
+}
+
+div.tabs > *.active{
+  @apply bg-customColorPrimary text-white;
 }

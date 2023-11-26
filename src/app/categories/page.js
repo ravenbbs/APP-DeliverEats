@@ -13,6 +13,9 @@ export default function CategoriesPage(){
     })
   }, [])
 
+  if(!isAdmin) {
+    return 'No eres un Administrador '
+  }
 
 
   return (

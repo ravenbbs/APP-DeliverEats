@@ -1,18 +1,20 @@
 import mongoose from "mongoose";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import User from "../../models/User";
+import {User} from "../../models/User";
+import { UserInfo } from "../../models/UserInfo";
 
 
 export async function PUT(req) {
   mongoose.connect(process.env.MONGO_URL)
   const data = await req.json();
+  const {name, image, ...otherUserInfo} = data
+
   const session = await getServerSession(authOptions);
   const email = session.user.email;
 
-
-    await User.updateOne({email}, data)
-
+    await User.updateOne({email}, {name, image})
+    await UserInfo.findOneAndUpdate({email}, otherUserInfo ,{upsert: true});
 
   return Response.json(true);
 }
@@ -24,8 +26,10 @@ export async function GET(){
   if (!email) {
     return Response.json({});
   }
-  return Response.json(
-    await User.findOne({email})
-  )
+
+  const user = await User.findOne({email}).lean();
+  const userInfo = await UserInfo.findOne({email}).lean();
+
+  return Response.json({...user, ...userInfo});
   
 }

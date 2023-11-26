@@ -13,14 +13,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={roboto.className}>
-        <main className="max-w-4xl mx-auto p-2">
+    <html lang="en" className={roboto.className}>
+      <body className="flex flex-col min-h-screen">
+        <main className="max-w-4xl mx-auto p-2 flex-grow">
           <AppProvider>
             <Toaster />
             <Header />
             {children}
-            <footer className="font-normal text-gray-600 p-4 border-t">
+           
+          </AppProvider>
+        </main>
+        <footer className="font-normal text-gray-600 p-4 border-t ">
               <p className="text-center">&copy; 2023 All rights reserved</p>
               <p className="text-center">
                 Designed by{" "}
@@ -33,9 +36,7 @@ export default function RootLayout({ children }) {
                   ravenbbs{" "}
                 </a>
               </p>
-            </footer>
-          </AppProvider>
-        </main>
+        </footer>
       </body>
     </html>
   );

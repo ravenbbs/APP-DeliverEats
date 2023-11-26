@@ -1,11 +1,11 @@
 "use client";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import UserTabs from "../../components/layout/UserTabs";
+import Loading from "../../components/layout/Loading"
 
 export default function ProfilePage() {
   const session = useSession();
@@ -97,7 +97,7 @@ export default function ProfilePage() {
   }
 
   if (status === "loading" || !profileFetched) {
-    return "loading...";
+    return (<Loading />);
   }
   if (status === "unauthenticated") {
     redirect("/login");

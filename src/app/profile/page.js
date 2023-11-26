@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import UserTabs from "../../components/layout/UserTabs"
+import UserTabs from "../../components/layout/UserTabs";
 
 export default function ProfilePage() {
   const session = useSession();
@@ -17,6 +17,7 @@ export default function ProfilePage() {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [profileFetched, setProfileFetched] = useState(false);
   const { status } = session;
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function ProfilePage() {
           setCity(data.city);
           setCountry(data.country);
           setIsAdmin(data.admin);
+          setProfileFetched(true);
         });
       });
     }
@@ -94,7 +96,7 @@ export default function ProfilePage() {
     }
   }
 
-  if (status === "loading") {
+  if (status === "loading" || !profileFetched) {
     return "loading...";
   }
   if (status === "unauthenticated") {
@@ -103,9 +105,8 @@ export default function ProfilePage() {
 
   return (
     <section className=" mt-8 ">
-      
-     <UserTabs isAdmin={isAdmin} />
-      <div className="max-w-xl mx-auto border my-8">
+      <UserTabs isAdmin={isAdmin} />
+      <div className="max-w-xl mx-auto my-8">
         <div className="flex gap-2 ">
           <div>
             <div className=" bg-gray-200 p-2 rounded-lg max-w-[140px] ">

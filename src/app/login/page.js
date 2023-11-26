@@ -18,7 +18,7 @@ export default function LoginPage() {
   }
   return (
     <section className=" mt-8 ">
-      <h1 className="text-center text-customColor text-4xl font-bold my-6">
+      <h1 className="text-center text-customColorPrimaryDark text-4xl font-bold my-6">
         Inicia Sesión
       </h1>
       <form className="block max-w-sm mx-auto" onSubmit={handleFormSubmit}>
@@ -64,7 +64,7 @@ export default function LoginPage() {
         <div className="text-center text-gray-600 hover:text-gray-800 transition-all my-2 ">
           Aun no tienes cuenta?{" "}
           <Link
-            className="text-red-500 font-medium hover:text-red-600 transition-colors"
+            className="text-customColorPrimary font-medium hover:text-customColorPrimaryDark transition-colors"
             href={"/register"}
           >
             Regístrate

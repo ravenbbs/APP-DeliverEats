@@ -31,14 +31,14 @@ export default function RegisterPage() {
 
   return (
     <section className="mt-8">
-      <h1 className="text-center text-customColor text-4xl font-bold my-6">
+      <h1 className="text-center text-customColorPrimaryDark text-4xl font-bold my-6">
         Regístrate
       </h1>
       {userCreated && (
         <div className="my-4 text-center font-medium">
           Usuario Creado <br />
           Ahora puedes{" "}
-          <Link className="text-red-600" href={"/login"}>
+          <Link className="text-customColorPrimary" href={"/login"}>
             Iniciar Sesión &raquo;
           </Link>
         </div>
@@ -91,7 +91,7 @@ export default function RegisterPage() {
         <div className="text-center text-gray-600 hover:text-gray-800 transition-all my-2 ">
           Ya tienes cuenta?{" "}
           <Link
-            className="text-red-500 font-medium hover:text-red-600 transition-colors"
+            className="text-customColorPrimary font-medium hover:text-customColorPrimaryDark transition-colors"
             href={"/login"}
           >
             Inicia Sesión

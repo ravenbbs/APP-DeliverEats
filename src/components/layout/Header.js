@@ -35,7 +35,7 @@ export default function Header() {
 
             <button
               onClick={() => signOut("")}
-              className="bg-customColorBT text-gray-800  px-4 py-2 rounded-full"
+              className="bg-customColorBT text-gray-800  px-4 py-2 rounded-full border-customColorPrimary"
             >
               Cerrar Sesión
             </button>

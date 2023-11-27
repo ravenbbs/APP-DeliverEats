@@ -59,7 +59,7 @@ button{
 }
 
 button[type="submit"], .submit{
-  @apply border-0 bg-customColorBT text-gray-800;
+  @apply border-customColorBT bg-customColorBT text-gray-800;
 }
 
 button[type="submit"]:disabled, .submit:disabled{

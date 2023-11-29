@@ -9,6 +9,16 @@ export default function CategoriesPage() {
 
   const [newCategoryName, setNewCategoryName] = useState('')
   const {loading:profileLoading, data:profileData} = useProfile();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() =>{
+    fetch('/api/categories').then(res => {
+      res.json().then(categories => {
+        setCategories(categories);
+      });
+    });
+  }, []);
+
 
  
   async function handleNewCategorySubmit(ev){
@@ -62,8 +72,10 @@ export default function CategoriesPage() {
             </button>
           </div>
         </div>
-       
       </form>
+      <div>
+        {}
+      </div>
     </section>
   );
 }

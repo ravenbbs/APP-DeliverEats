@@ -55,7 +55,7 @@ label + input{
 
 button{
   @apply block w-full text-gray-600 font-bold border border-gray-400;
-  @apply my-2 py-2 px-4 border-gray-400 rounded-lg hover:scale-105	transition-all;
+  @apply my-2 py-2 px-4 border-gray-400 rounded-lg hover:scale-105	transition-all duration-500;
 }
 
 button[type="submit"], .submit{

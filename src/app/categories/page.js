@@ -7,10 +7,11 @@ import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
 
-  const [newCategoryName, setNewCategoryName] = useState('')
+  const [categoryName, setCategoryName] = useState('')
   const {loading:profileLoading, data:profileData} = useProfile();
   const [categories, setCategories] = useState([]);
-
+  const [editedCategory, setEditedCategory] = useState(null)
+  
   useEffect(() =>{
     fetchCategories()
   }, []);
@@ -23,13 +24,18 @@ export default function CategoriesPage() {
     });
   }
 
-  async function handleNewCategorySubmit(ev){
+  async function handleCategorySubmit(ev){
     ev.preventDefault();
     const creationPromise = new Promise(async(resolve, reject) => {
+      const data = {name: categoryName}
+      if (editedCategory){
+        data._id = editedCategory._id
+      }
+
       const response = await fetch('/api/categories/', {
-        method: 'POST',
+        method: editedCategory ? 'PUT' : 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({name: newCategoryName})
+        body: JSON.stringify(data)
       });
       setCategories('')
       fetchCategories()
@@ -57,23 +63,28 @@ export default function CategoriesPage() {
   return (
     <section className="max-w-md mx-auto my-8">
       <UserTabs isAdmin={true} />
-      <form className="mt-8" onSubmit={handleNewCategorySubmit}>
+      <form className="mt-8" onSubmit={handleCategorySubmit}>
         <div className="flex gap-6 items-end">
           <div className="grow">
             <label>
-              Nueva Categoría
+              {editedCategory ? 'Editar Categoría' : 'Nueva Categoría'}
+              {editedCategory && (
+              <>: <b className="font-extrabold text-gray-900">{editedCategory.name}</b> </>
+              )}
             </label>
             <input 
-            required="true"
+            required={true}
             type="text" 
-            value={newCategoryName}
-            onChange={ev => setNewCategoryName(ev.target.value)}>
+            value={categoryName}
+            onChange={ev => setCategoryName(ev.target.value)}>
 
             </input>
           </div>
           <div>
-            <button type="submit" className="border border-customColorPrimary" >
-              Agregar
+            <button 
+            type="submit" 
+            className="border border-customColorPrimary" >
+              {editedCategory ? 'Editar' : 'Agregar'}
             </button>
           </div>
         </div>
@@ -81,7 +92,14 @@ export default function CategoriesPage() {
       <ul className="mt-4">
         <label>Editar Categorías:</label>
         {categories?.length > 0 && categories.map(c => (
-          <button className="text-left cursor-pointer bg-gray-200 mb-1 px-4 py-2 rounded-md text-base font-bold text-gray-700">
+          <button 
+          key={c._id}
+          onClick={()=> {
+            setEditedCategory(c);
+            setCategoryName(c.name)
+          
+          }}
+          className="text-left cursor-pointer bg-gray-200 mb-2 mt-0 px-4 py-2 rounded-md text-base font-bold text-gray-700">
             {c.name}
           </button>
         ))}

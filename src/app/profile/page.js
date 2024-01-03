@@ -1,11 +1,11 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import UserTabs from "../../components/layout/UserTabs";
-import Loading from "../../components/layout/Loading"
+import Loading from "../../components/layout/Loading";
+import EditableImage from "../../components/layout/EditableImage";
 
 export default function ProfilePage() {
   const session = useSession();
@@ -66,38 +66,8 @@ export default function ProfilePage() {
     });
   }
 
-  async function handleFileChange(ev) {
-    ev.preventDefault();
-
-    const selectedFile = ev.target.files[0];
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      const uploadPromise = new Promise(async (resolve, reject) => {
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setImage(data.url);
-          resolve();
-        } else {
-          reject();
-        }
-      });
-
-      await toast.promise(uploadPromise, {
-        loading: "Subiendo ..",
-        success: "Subida Completada!",
-        error: "Ocurrió un error intente mas tarde",
-      });
-    }
-  }
-
   if (status === "loading" || !profileFetched) {
-    return (<Loading />);
+    return <Loading />;
   }
   if (status === "unauthenticated") {
     redirect("/login");
@@ -109,27 +79,7 @@ export default function ProfilePage() {
       <div className="max-w-xl mx-auto my-8">
         <div className="flex gap-2 ">
           <div>
-            <div className=" bg-gray-200 p-2 rounded-lg max-w-[140px] ">
-              {image && (
-                <Image
-                  className="rounded-lg w-full h-full mb-2"
-                  src={image}
-                  width={150}
-                  height={150}
-                  alt="avatar"
-                />
-              )}
-              <label>
-                <input
-                  type="file"
-                  className="hidden"
-                  onChange={handleFileChange}
-                ></input>
-                <span className=" cursor-pointer block mt-2 border p-2 border-gray-400 bg-gray-300  rounded-lg hover:scale-105	transition-all text-center font-semibold">
-                  Editar
-                </span>
-              </label>
-            </div>
+            <EditableImage link={image} setLink={setImage} />
           </div>
           <form className=" grow" onSubmit={handleProfileInfoUpdate}>
             <label>Nombre y Apellido</label>

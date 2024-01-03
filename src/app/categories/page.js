@@ -56,7 +56,7 @@ async function handleCategorySubmit(ev){
       setCategoryName('')
       // Vuelve a cargar las categorías después de la creación o edición.
       fetchCategories()
-
+      // Reiniciar a null el estado de edición 
       setEditedCategory(null)
       // Resuelve o rechaza la promesa según la respuesta de la API.
       if (response.ok)

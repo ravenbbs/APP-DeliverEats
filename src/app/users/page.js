@@ -16,6 +16,9 @@ if (profileLoading) {
     <Loading />
   );
 }
+if (!profileData) {
+  return 'No eres un admin';
+}
 
 return (
   <section className="max-w-md mx-auto my-8">

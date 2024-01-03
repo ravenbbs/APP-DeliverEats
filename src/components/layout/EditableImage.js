@@ -33,16 +33,20 @@ export default function EditableImage({ link, setLink }) {
   }
 
   return (
-    <div className=" bg-gray-200 p-2 rounded-lg max-w-[140px] ">
-      {link && (
+    <div className="rounded-lg">
+      <div className="border-4 border-stone-300 rounded-lg flex items-center justify-center h-fit w-fit">
+            {link && (
         <Image
-          className="rounded-lg h-full mb-2 w-full"
+          className="overflow-hidden rounded-lg h-full w-full  max-w-[140px] max-h-[140px]"
           src={link}
-          width={150}
-          height={150}
+          width={120}
+          height={120}
           alt="avatar"
         />
       )}
+      </div>
+  
+
       {!link && (
         <div className="bg-white rounded-md w-24 h-24 font-bold flex text-center items-center">
           No hay Imagen
@@ -55,7 +59,7 @@ export default function EditableImage({ link, setLink }) {
           className="hidden"
           onChange={handleFileChange}
         ></input>
-        <span className=" cursor-pointer block mt-2 border p-2 border-gray-400 bg-gray-300  rounded-lg hover:scale-105	transition-all text-center font-semibold">
+        <span className=" cursor-pointer block mt-4 border p-2 border-gray-400 bg-gray-300  rounded-lg hover:scale-105	transition-all text-center font-semibold">
           Editar
         </span>
       </label>

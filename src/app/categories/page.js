@@ -7,49 +7,71 @@ import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
 
-  const [categoryName, setCategoryName] = useState('')
-  const {loading:profileLoading, data:profileData} = useProfile();
-  const [categories, setCategories] = useState([]);
-  const [editedCategory, setEditedCategory] = useState(null)
-  
-  useEffect(() =>{
+// Estado para almacenar el nombre de la categoría del formulario.
+const [categoryName, setCategoryName] = useState('')
+// Utiliza el hook useProfile para gestionar el estado del perfil, incluyendo el estado de carga y los datos del perfil.
+const {loading: profileLoading, data: profileData} = useProfile();
+// Estado para almacenar la lista de categorías obtenidas de la API.
+const [categories, setCategories] = useState([]);
+// Estado para almacenar la categoría que se está editando actualmente (si hay alguna).
+const [editedCategory, setEditedCategory] = useState(null)
+
+// Efecto que se ejecuta una vez al montar el componente para cargar las categorías iniciales.
+useEffect(() =>{
+    // Llama a la función fetchCategories al montar el componente.
     fetchCategories()
-  }, []);
+}, []);
 
-  function fetchCategories()  {
-    fetch('/api/categories').then(res => {
+// Esta función realiza una solicitud a la API para obtener la lista de categorías y actualiza el estado correspondiente.
+function fetchCategories()  {
+  // Realiza una solicitud GET a la API para obtener las categorías.
+  fetch('/api/categories').then(res => {
+      // Parsea la respuesta como JSON.
       res.json().then(categories => {
-        setCategories(categories);
+          // Actualiza el estado de las categorías con la respuesta de la API.
+          setCategories(categories);
       });
-    });
-  }
+  });
+}
 
-  async function handleCategorySubmit(ev){
-    ev.preventDefault();
-    const creationPromise = new Promise(async(resolve, reject) => {
+// Esta función asincrónica maneja el envío de formularios para categorías.
+async function handleCategorySubmit(ev){
+  // Evita el comportamiento predeterminado del formulario (recargar la página).
+  ev.preventDefault();
+  // Crea una promesa para manejar la lógica asíncrona de la creación o edición de categorías.
+  const creationPromise = new Promise(async(resolve, reject) => {
+      // Construye el objeto de datos con el nombre de la categoría.
       const data = {name: categoryName}
+      // Si se está editando una categoría existente, agrega su ID a los datos.
       if (editedCategory){
-        data._id = editedCategory._id
+          data._id = editedCategory._id
       }
-
+      // Realiza una solicitud a la API para crear o editar la categoría.
       const response = await fetch('/api/categories/', {
-        method: editedCategory ? 'PUT' : 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+          method: editedCategory ? 'PUT' : 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
       });
+      // Limpia el estado de las categorías.
       setCategories('')
+      // Vuelve a cargar las categorías después de la creación o edición.
       fetchCategories()
+      // Resuelve o rechaza la promesa según la respuesta de la API.
       if (response.ok)
-      resolve();
+          resolve();
       else
-      reject();
-    });
-      await toast.promise(creationPromise, {
-        loading: 'Creando Nueva Categoría ...',
-        success: 'Categoría Creada con Éxito',
-        error: 'Ocurrió un error intenta mas tarde'
-      })
-  }
+          reject();
+  });
+  // Muestra una notificación tostada mientras espera que se complete la operación asíncrona.
+  await toast.promise(creationPromise, {
+      loading: 'Creando Nueva Categoría ...',
+      success: 'Categoría Creada con Éxito',
+      error: 'Ocurrió un error. Intenta de nuevo más tarde.'
+  })
+}
+
+
+
 
   if (profileLoading) {
     return (
@@ -59,6 +81,9 @@ export default function CategoriesPage() {
   if (!profileData) {
     return 'No eres un admin';
   }
+
+
+
 
   return (
     <section className="max-w-md mx-auto my-8">

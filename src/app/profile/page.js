@@ -66,9 +66,10 @@ export default function ProfilePage() {
     });
   }
 
-  if (status === "loading" || !profileFetched) {
-    return <Loading />;
-  }
+  // if (status === "loading" || !profileFetched) {
+  //   return <Loading />;
+  // }
+
   if (status === "unauthenticated") {
     redirect("/login");
   }
@@ -78,8 +79,8 @@ export default function ProfilePage() {
       <UserTabs isAdmin={isAdmin} />
       <div className="max-w-xl mx-auto my-8">
         <div className="flex gap-4 ">
-          <div>
-            <EditableImage link={image} setLink={setImage} />
+          <div >
+            <EditableImage link={image} setLink={setImage} width={120} height={120} />
           </div>
           <form className=" grow" onSubmit={handleProfileInfoUpdate}>
             <label>Nombre y Apellido</label>
@@ -92,7 +93,7 @@ export default function ProfilePage() {
             <label>Correo Electrónico</label>
             <input
               type="email"
-              value={session.data.user.email}
+              value={session?.data?.user?.email}
               disabled={true}
             ></input>
             <label>Numero de Teléfono</label>

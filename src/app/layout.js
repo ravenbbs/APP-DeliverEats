@@ -25,9 +25,9 @@ export default function RootLayout({ children }) {
         <footer className="font-normal text-gray-600 p-4 border-t ">
               <p className="text-center">&copy; 2023 All rights reserved</p>
               <p className="text-center">
-                Designed by
+                Designed by {" "}
                 <a
-                  className="hover:text-fuchsia-500 transition-colors font-bold"
+                  className="hover:text-fuchsia-500 transition-colors duration-500 font-bold"
                   href="https://github.com/ravenbbs"
                   target="_blank"
                 >

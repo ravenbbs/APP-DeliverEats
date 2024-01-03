@@ -10,12 +10,12 @@ export default function MenuItemsPAge() {
   // Utiliza el hook useProfile para gestionar el estado del perfil, incluyendo el estado de carga y los datos del perfil.
   const { loading: profileLoading, data: profileData } = useProfile();
 
-  if (profileLoading) {
-    return <Loading />;
-  }
-  if (!profileData) {
-    return "No eres un admin";
-  }
+  // if (profileLoading) {
+  //   return <Loading />;
+  // }
+  // if (!profileData) {
+  //   return "No eres un admin";
+  // }
 
   return (
     <section className="max-w-xl mx-auto my-8">
@@ -24,7 +24,7 @@ export default function MenuItemsPAge() {
       <form className=" mx-auto my-8">
         <div className="flex gap-4">
           <div>
-            <EditableImage link={image} setLink={setImage} />
+            <EditableImage link={image} setLink={setImage} width={120} height={120} />
           </div>
           <div className=" grow ">
             <label>Nombre</label>

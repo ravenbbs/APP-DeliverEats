@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import Image from "next/image";
 
-export default function EditableImage({ link, setLink }) {
+export default function EditableImage({ link, setLink, width, height }) {
   async function handleFileChange(ev) {
     ev.preventDefault();
 
@@ -34,23 +34,21 @@ export default function EditableImage({ link, setLink }) {
 
   return (
     <div className="rounded-lg">
-      <div className="border-4 border-stone-300 rounded-lg flex items-center justify-center h-fit w-fit">
-            {link && (
-        <Image
-          className="overflow-hidden rounded-lg h-full w-full  max-w-[140px] max-h-[140px]"
-          src={link}
-          width={120}
-          height={120}
-          alt="avatar"
-        />
+      {link && (
+        <div className="bg-gray-200 border-4 border-stone-300 rounded-lg flex items-center justify-center h-fit w-fit">
+          <Image
+            className='overflow-hidden rounded-lg h-full w-full'
+            src={link}
+            width={width}
+            height={height}
+            alt="avatar"
+          />
+        </div>
       )}
-      </div>
-  
 
       {!link && (
-        <div className="bg-white rounded-md w-24 h-24 font-bold flex text-center items-center">
+        <div className="bg-gray-100 border-4 border-stone-300 rounded-lg w-24 h-24 font-bold flex text-center items-center">
           No hay Imagen
-    
         </div>
       )}
       <label>

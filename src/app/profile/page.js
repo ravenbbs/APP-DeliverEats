@@ -77,7 +77,7 @@ export default function ProfilePage() {
     <section className=" mt-8 ">
       <UserTabs isAdmin={isAdmin} />
       <div className="max-w-xl mx-auto my-8">
-        <div className="flex gap-2 ">
+        <div className="flex gap-4 ">
           <div>
             <EditableImage link={image} setLink={setImage} />
           </div>
@@ -136,7 +136,7 @@ export default function ProfilePage() {
               value={country}
               onChange={(ev) => setCountry(ev.target.value)}
             ></input>
-            <button className="mt-4" type="submit">
+            <button className="mt-4 w-52 mx-auto " type="submit">
               Guardar
             </button>
           </form>

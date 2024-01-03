@@ -52,10 +52,12 @@ async function handleCategorySubmit(ev){
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data)
       });
-      // Limpia el estado de las categorías.
-      setCategories('')
+      // Limpia el estado de el nombre de la categoría, ubicado en el input.
+      setCategoryName('')
       // Vuelve a cargar las categorías después de la creación o edición.
       fetchCategories()
+
+      setEditedCategory(null)
       // Resuelve o rechaza la promesa según la respuesta de la API.
       if (response.ok)
           resolve();
@@ -64,8 +66,8 @@ async function handleCategorySubmit(ev){
   });
   // Muestra una notificación tostada mientras espera que se complete la operación asíncrona.
   await toast.promise(creationPromise, {
-      loading: 'Creando Nueva Categoría ...',
-      success: 'Categoría Creada con Éxito',
+      loading: editedCategory ? 'Editando Categoría...' : 'Creando Nueva Categoría...',
+      success: editedCategory ? 'Categoría Editada con Éxito' : 'Categoría Creada con Éxito',
       error: 'Ocurrió un error. Intenta de nuevo más tarde.'
   })
 }

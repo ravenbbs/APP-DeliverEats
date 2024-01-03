@@ -1,3 +1,4 @@
+import { Flow_Rounded } from 'next/font/google';
 import {Category} from '../../models/Category'
 
 export async function POST(req){
@@ -5,6 +6,11 @@ export async function POST(req){
   const categoryDoc = await Category.create({name})
   return Response.json(categoryDoc)
 
+}
+export async function PUT(req){
+  const {_id, name} = await req.json();
+  await Category.updateOne({_id}, {name})
+  return Response.json(true)
 }
 
 

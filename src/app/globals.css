@@ -53,8 +53,8 @@ label + input{
   margin-top: -2px
 }
 
-button{
-  @apply block w-full text-gray-600 font-bold border border-gray-400;
+button, .buttonCustom{
+  @apply block w-full  font-bold border border-gray-400;
   @apply my-2 py-2 px-4 border-gray-400 rounded-lg hover:scale-105	transition-all duration-500;
 }
 

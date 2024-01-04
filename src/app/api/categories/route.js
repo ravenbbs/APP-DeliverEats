@@ -1,7 +1,10 @@
+import mongoose from 'mongoose';
 import {Category} from '../../models/Category'
 
 // Función asíncrona para manejar las solicitudes POST para crear una nueva categoría.
 export async function POST(req) {
+  mongoose.connect(process.env.MONGO_URL)
+
   // Extrae el nombre de la categoría desde el cuerpo de la solicitud JSON.
   const { name } = await req.json();
 
@@ -14,6 +17,8 @@ export async function POST(req) {
 
 // Función asíncrona para manejar las solicitudes PUT para actualizar una categoría existente.
 export async function PUT(req) {
+  mongoose.connect(process.env.MONGO_URL)
+
   // Extrae el ID y el nombre de la categoría desde el cuerpo de la solicitud JSON.
   const { _id, name } = await req.json();
 
@@ -26,6 +31,8 @@ export async function PUT(req) {
 
 // Función asíncrona para manejar las solicitudes GET para obtener todas las categorías.
 export async function GET() {
+  mongoose.connect(process.env.MONGO_URL)
+
   // Devuelve una respuesta JSON que contiene todas las categorías obtenidas de la base de datos.
   return Response.json(await Category.find());
 }

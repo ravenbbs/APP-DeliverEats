@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
-import { useProfile } from "../../components/UseProfile";
-import Loading from "../../components/layout/Loading";
-import UserTabs from "../../components/layout/UserTabs";
-import EditableImage from "../../components/layout/EditableImage";
+import { useProfile } from "../../../components/UseProfile";
+import Loading from "../../../components/layout/Loading";
+import UserTabs from "../../../components/layout/UserTabs";
+import EditableImage from "../../../components/layout/EditableImage";
 import toast from "react-hot-toast";
 
 export default function NewMenuItemPage(){

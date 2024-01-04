@@ -38,37 +38,45 @@ export default function ProfilePage() {
     }
   }, [session, status]);
 
-  async function handleProfileInfoUpdate(ev) {
-    ev.preventDefault();
+// Función asincrónica para manejar la actualización de información de perfil.
+async function handleProfileInfoUpdate(ev) {
+  // Evita el comportamiento predeterminado del formulario (recargar la página).
+  ev.preventDefault();
 
-    const savingPromise = new Promise(async (resolve, reject) => {
+  // Crea una promesa para manejar la lógica asíncrona de la actualización del perfil.
+  const savingPromise = new Promise(async (resolve, reject) => {
+      // Realiza una solicitud PUT a la API para actualizar la información del perfil.
       const response = await fetch("/api/profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: userName,
-          image,
-          streetAddress,
-          phone,
-          postalCode,
-          city,
-          country,
-        }),
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          // Envia los datos del perfil en formato JSON en el cuerpo de la solicitud.
+          body: JSON.stringify({
+              name: userName,
+              image,
+              streetAddress,
+              phone,
+              postalCode,
+              city,
+              country,
+          }),
       });
-      if (response.ok) resolve();
-      else reject();
-    });
-
-    await toast.promise(savingPromise, {
-      loading: "Cargando ..",
+      // Resuelve o rechaza la promesa según la respuesta de la API.
+      if (response.ok)
+          resolve();
+      else
+          reject();
+  });
+  // Muestra una notificación tostada mientras espera que se complete la operación asíncrona.
+  await toast.promise(savingPromise, {
+      loading: "Cargando ...",
       success: "Perfil Actualizado!!",
-      error: "Ocurrió un error intente mas tarde",
-    });
-  }
+      error: "Ocurrió un error. Intenta de nuevo más tarde.",
+  });
+}
 
-  // if (status === "loading" || !profileFetched) {
-  //   return <Loading />;
-  // }
+  if (status === "loading" || !profileFetched) {
+    return <Loading />;
+  }
 
   if (status === "unauthenticated") {
     redirect("/login");

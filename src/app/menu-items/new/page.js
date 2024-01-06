@@ -5,6 +5,7 @@ import Loading from "../../../components/layout/Loading";
 import UserTabs from "../../../components/layout/UserTabs";
 import EditableImage from "../../../components/layout/EditableImage";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function NewMenuItemPage(){
 // Utiliza el hook useProfile para gestionar el estado del perfil, incluyendo el estado de carga y los datos del perfil.
@@ -32,6 +33,10 @@ async function handleFormSubmit(ev) {
     success: "Producto guardado!!",
     error: "Ocurrió un error. Intenta de nuevo más tarde.",
   });
+  setImage('')
+  setName('')
+  setDescription('')
+  setPrice('')
 }
 
 if (profileLoading) {
@@ -45,8 +50,10 @@ if (!profileData) {
 
 return (
   <section className="max-w-xl mx-auto my-8">
+  
   <UserTabs isAdmin={true} />
   <div className="max-w-xl mx-auto my-8">
+    <Link className="mx-auto block text-center max-w-sm text-black buttonCustom bg-customColorBT" href={'/menu-items'}>Ver todos los items </Link>
     <form onSubmit={handleFormSubmit} className=" mx-auto my-8">
       <div className="flex gap-4">
         <div>

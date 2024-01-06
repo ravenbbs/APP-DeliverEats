@@ -17,14 +17,18 @@ export default function MenuItemsPage() {
   }
 
   return (
-    <section className="max-w-md mx-auto my-8">
+    <section className="max-w-xl mx-auto my-8">
       <UserTabs isAdmin={true}  />
       <div className="mt-8">
         <Link 
-          className="block text-center text-black buttonCustom bg-customColorBT" 
+          className="block max-w-sm mx-auto text-center text-black buttonCustom bg-customColorBT" 
           href={"/menu-items/new"}>
             Crear Nuevo
         </Link>
+        
+
+
+
       </div>
         
     </section>

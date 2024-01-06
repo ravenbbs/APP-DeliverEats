@@ -126,7 +126,7 @@ async function handleCategorySubmit(ev){
             setCategoryName(c.name)
           
           }}
-          className="text-left cursor-pointer bg-gray-200 mb-2 mt-0 px-4 py-2 rounded-md text-base font-bold text-gray-700">
+          className="text-left cursor-pointer bg-gray-100 mb-2 mt-0 px-4 py-2 rounded-md text-base font-bold text-gray-700">
             {c.name}
           </button>
         ))}

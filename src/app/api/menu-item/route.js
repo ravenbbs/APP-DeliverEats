@@ -10,3 +10,11 @@ export async function POST(req){
   return Response.json(menuItemDoc)
 
 } 
+
+export async function GET(req){
+  mongoose.connect(process.env.MONGO_URL)
+  return Response.json(
+    await MenuItem.find()
+  )
+
+}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { useProfile } from "../../../components/UseProfile";
 import Loading from "../../../components/layout/Loading";

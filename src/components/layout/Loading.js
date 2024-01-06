@@ -1,7 +1,12 @@
+'use client'
 import { leapfrog } from "ldrs";
 
 export default function loading(){
-  leapfrog.register();
+
+  if (typeof window !== 'undefined') {
+    const { leapfrog } = require('ldrs');
+    leapfrog.register();
+  }
 
   return (
     <div className="flex mx-auto justify-center loading items-center">

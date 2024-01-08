@@ -27,14 +27,14 @@ export default function NewMenuItemPage() {
         setPrice(item.price)
       })
     })
-  })
+  }, [])
 
   async function handleFormSubmit(ev) {
     ev.preventDefault();
     const savingPromise = new Promise(async (resolve, reject) => {
-      const data = { image, name, description, price };
+      const data = { image, name, description, price, _id:id };
       const response = await fetch("/api/menu-item", {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
@@ -47,10 +47,6 @@ export default function NewMenuItemPage() {
       success: "Producto guardado!!",
       error: "Ocurrió un error. Intenta de nuevo más tarde.",
     });
-    setImage("");
-    setName("");
-    setDescription("");
-    setPrice("");
   }
 
   if (profileLoading) {

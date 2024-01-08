@@ -6,29 +6,29 @@ import UserTabs from "../../../../components/layout/UserTabs";
 import MenuItemForm from "../../../../components/layout/MenuItemForm";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import Left from '../../../../components/icons/Left'
+import Left from "../../../../components/icons/Left";
 import { useParams, redirect } from "next/navigation";
 export default function NewMenuItemPage() {
   // Utiliza el hook useProfile para gestionar el estado del perfil, incluyendo el estado de carga y los datos del perfil.
-  
-  const {id} = useParams()
+
+  const { id } = useParams();
   const { loading: profileLoading, data: profileData } = useProfile();
   const [menuItem, setMenuItem] = useState("");
-  const [redirectToItems, setRedirectToItems] = useState(false)
+  const [redirectToItems, setRedirectToItems] = useState(false);
 
   useEffect(() => {
-    fetch('/api/menu-item').then(res => {
-      res.json().then(items => {
-        const item = items.find(i => i._id === id)
-        setMenuItem(item)
-      })
-    })
-  }, [])
+    fetch("/api/menu-item").then((res) => {
+      res.json().then((items) => {
+        const item = items.find((i) => i._id === id);
+        setMenuItem(item);
+      });
+    });
+  }, []);
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
     const savingPromise = new Promise(async (resolve, reject) => {
-      data = { ...data, _id:id };
+      data = { ...data, _id: id };
       const response = await fetch("/api/menu-item", {
         method: "PUT",
         body: JSON.stringify(data),
@@ -43,12 +43,12 @@ export default function NewMenuItemPage() {
       success: "Producto guardado!!",
       error: "Ocurrió un error. Intenta de nuevo más tarde.",
     });
-    
-    setRedirectToItems(true)
+
+    setRedirectToItems(true);
   }
 
-  if (redirectToItems){
-    return redirect('/menu-items')
+  if (redirectToItems) {
+    return redirect("/menu-items");
   }
 
   if (profileLoading) {
@@ -67,7 +67,7 @@ export default function NewMenuItemPage() {
           href={"/menu-items"}
         >
           <div className="flex justify-center gap-4">
-        <Left />
+            <Left />
             Ver todos los items
           </div>
         </Link>

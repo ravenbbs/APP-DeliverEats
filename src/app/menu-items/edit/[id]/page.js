@@ -1,19 +1,33 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useProfile } from "../../../components/UseProfile";
-import Loading from "../../../components/layout/Loading";
-import UserTabs from "../../../components/layout/UserTabs";
-import EditableImage from "../../../components/layout/EditableImage";
+import { useProfile } from "../../../../components/UseProfile";
+import Loading from "../../../../components/layout/Loading";
+import UserTabs from "../../../../components/layout/UserTabs";
+import EditableImage from "../../../../components/layout/EditableImage";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import Left from '../../../components/icons/Left'
+import Left from '../../../../components/icons/Left'
+import { useParams } from "next/navigation";
 export default function NewMenuItemPage() {
   // Utiliza el hook useProfile para gestionar el estado del perfil, incluyendo el estado de carga y los datos del perfil.
+  const {id} = useParams()
   const { loading: profileLoading, data: profileData } = useProfile();
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+
+  useEffect(() => {
+    fetch('/api/menu-item').then(res => {
+      res.json().then(items => {
+        const item = items.find(i => i._id === id)
+        setImage(item.image)
+        setName(item.name)
+        setDescription(item.description)
+        setPrice(item.price)
+      })
+    })
+  })
 
   async function handleFormSubmit(ev) {
     ev.preventDefault();

@@ -6,6 +6,14 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
   const [name, setName] = useState(menuItem.name || "");
   const [description, setDescription] = useState(menuItem.description || "");
   const [price, setPrice] = useState(menuItem.price || "");
+  const [sizes, setSizes] = useState([])
+
+  function addSize(){
+    setSizes(oldSizes => {
+      return [...oldSizes, {name:'', price:0}]
+    })
+  }
+
 
   return (
     <form
@@ -43,6 +51,28 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
             onChange={(ev) => setPrice(ev.target.value)}
             type="text"
           />
+          <label>Tamaños</label>
+          <div className="bg-gray-200 border-gray-400 border p-2 rounded-md ">
+          {sizes?.length > 0 && sizes.map(size => (
+            <div>
+              <input 
+                type="text" 
+                placeholder="Nombre del tamaño"
+                value={size.name} />
+              <input 
+                type="text" 
+                placeholder="Precio extra" 
+                value={size.price}/>
+            </div>
+          ))}
+          <button
+          type="button"
+          onClick={addSize}
+          className="bg-white w-52 mx-auto mt-4"
+          >
+            Agregar tamaño
+          </button>
+          </div>
           <button className="mt-4 w-52 mx-auto " type="submit">
             Guardar
           </button>
